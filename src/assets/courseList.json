@@ -1,0 +1,131 @@
+{
+    "All": ["DS1", "DS2", "DS3", "DS4", "CS1", "CS2", "CS3", "CS4"],
+    "DSE": ["DS2", "DS3", "DS4"],
+    "CSE": ["CS2", "CS3", "CS4"],
+  
+    "courses": [
+      {
+        "course_name": "Matrix Computations For Data Science",
+        "course_code": "DS-412",
+        "instructor": "aa",
+        "availability": "valid",
+        "dcfor": ["DS2", "DS3"],
+        "defor": ["CSE", "DSE"],
+        "icornot": "no",
+        "slot":"B",
+        "credit":"3"
+      },
+      {
+        "course_name": "Information Security And Privacy",
+        "course_code": "DS-404",
+        "instructor": "bb",
+        "availability": "valid",
+        "dcfor": ["DS2", "DS3"],
+        "defor": "All",
+        "icornot": "no",
+        "slot":"B",
+        "credit":"4"
+        
+      },
+      {
+        "course_name": "Statistical Foundations Of Data Science",
+        "course_code": "DS-313",
+        "instructor": "cc",
+        "availability": "invalid",
+        "dcfor": ["DS3"],
+        "defor": ["CS2", "MNC3"],
+        "icornot": "no",
+        "slot":"C",
+        "credit":"3"
+      },
+      {
+        "course_name": "Computing Systems For Data Processing",
+        "course_code": "DS-303",
+        "instructor": "dd",
+        "availability": "valid",
+        "dcfor": ["DS2"],
+        "defor": "All",
+        "icornot": "no",
+        "slot":"D",
+        "credit":"30"
+      },
+      {
+        "course_name": "Introduction to Python and Data Science",
+        "course_code": "IC-152",
+        "instructor": "ee",
+        "availability": "valid",
+        "dcfor": "All",
+        "defor": "All",
+        "icornot": "yes",
+        "slot":"E",
+        "credit":"4"
+      },
+      {
+        "course_name": "Mathematical Foundation Of Data Science",
+        "course_code": "DS-301",
+        "instructor": "aa",
+        "availability": "valid",
+        "dcfor": ["DS2", "CS3"],
+        "defor": ["CSE", "DSE"],
+        "icornot": "no",
+        "slot":"A",
+        "credit":"3"
+      },
+      {
+        "course_name": "Data Handling And Visualization",
+        "course_code": "DS-201",
+        "instructor": "bb",
+        "availability": "valid",
+        "dcfor": ["DS2", "DS3"],
+        "defor": "All",
+        "icornot": "no",
+        "slot":"B",
+        "credit":"4"
+      },
+      {
+        "course_name": "Computer Organization",
+        "course_code": "CS-214",
+        "instructor": "cc",
+        "availability": "invalid",
+        "dcfor": ["CS2"],
+        "defor": ["CS3", "DS2"],
+        "icornot": "no",
+        "slot":"C",
+        "credit":"3"
+      },
+      {
+        "course_name": "Design And Analysis Of Algorithms",
+        "course_code": "CS-212",
+        "instructor": "cc",
+        "availability": "invalid",
+        "dcfor": ["CS2"],
+        "defor": ["CS3", "DS2"],
+        "icornot": "no",
+        "slot":"D",
+        "credit":"4"
+      },
+      {
+        "course_name": " Algorithms",
+        "course_code": "XX-212",
+        "instructor": "cc",
+        "availability": "valid",
+        "dcfor": ["CS3"],
+        "defor": ["CS3", "DS2"],
+        "icornot": "no",
+        "slot":"C",
+        "credit":"3"
+      },
+      {
+        "course_name": "Machine Design",
+        "course_code": "ME-212",
+        "instructor": "cc",
+        "availability": "valid",
+        "dcfor": ["CS2"],
+        "defor": ["CS3", "DS2"],
+        "icornot": "no",
+        "slot":"D",
+        "credit":"3"
+      }
+    ]
+  }
+  
