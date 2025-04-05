@@ -184,70 +184,140 @@ app.delete("/courses/:id", async(req,res) =>{
 
 // PRE-REGISTRATION ROUTES
 // Get pre-registered courses for a student
-app.get("/coursepreregistration/:roll_no", async (req, res) => {
-    try {
-        const { roll_no } = req.params;
-        const registrations = await pool.query(
-            `SELECT pr.id, pr.course_code, pr.course_number, c.course_name
-             FROM coursepreregistration pr
-             JOIN courses c ON pr.course_code = c.course_code
-             WHERE pr.roll_no = $1`,
-            [roll_no]
-        );
-        
-        res.json(registrations.rows);
-    } catch (error) {
-        console.error(error.message);
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Save pre-registered courses
-// app.post("/coursepreregistration", async (req, res) => {
+// app.get("/coursepreregistration/:roll_no", async (req, res) => {
 //     try {
-//         const { roll_no, course_code, course_number } = req.body;
-        
-//         const newRegistration = await pool.query(
-//             `INSERT INTO coursepreregistration (roll_no, course_code, course_number) 
-//              VALUES ($1, $2, $3) 
-//              RETURNING *`,
-//             [roll_no, course_code, course_number]
-//         );
-        
-//         res.status(201).json({
-//             message: "Course registration saved successfully",
-//             registration: newRegistration.rows[0]
-//         });
+//         const { roll_no } = req.params;
+//         console.log("Fetching courses for roll_no:", roll_no); // Debugging log
+
+//         const query = `
+//             SELECT pr.id, pr.course_code, pr.slot, pr.status, c.course_name
+//             FROM Course_Pre_Registration pr
+//             LEFT JOIN courses c ON pr.course_code = c.course_code
+//             WHERE pr.roll_no = $1
+//         `;
+
+//         const result = await pool.query(query, [roll_no]);
+
+//         if (result.rows.length === 0) {
+//             return res.status(404).json({ error: "No courses found for this roll number" });
+//         }
+
+//         res.json(result.rows);
 //     } catch (error) {
-//         console.error(error.message);
-//         res.status(500).json({ error: error.message });
+//         console.error("Database error:", error.message);
+//         res.status(500).json({ error: "Failed to fetch course pre-registrations", details: error.message });
 //     }
 // });
-app.post("/register-courses", async (req, res) => {
+
+app.get("/coursepreregistration/:roll_no", async (req, res) => {
     try {
-      console.log("Received request:", req.body);
+      const { roll_no } = req.params
+      console.log("Fetching courses for roll_no:", roll_no)
   
-      const { courses } = req.body;
-      if (!courses || !Array.isArray(courses) || courses.length === 0) {
-        return res.status(400).json({ error: "Invalid course data" });
+      // Get the student's branch
+      const studentQuery = `SELECT student_branch_code FROM students WHERE roll_no = $1`
+      const studentResult = await pool.query(studentQuery, [roll_no])
+  
+      if (studentResult.rows.length === 0) {
+        return res.status(404).json({ error: "Student not found" })
       }
   
-      const values = courses.map(({ roll_no, course_code }, index) => 
-        `('${roll_no}', '${course_code}', ${index + 1})` // course_number assigned as index+1
-      ).join(",");
+      const studentBranch = studentResult.rows[0].student_branch_code
   
-      const query = `INSERT INTO coursepreregistration (roll_no, course_code, course_number) VALUES ${values}`;
-      
-      await db.query(query);
-      res.status(200).json({ message: "Courses registered successfully" });
+      // Now fetch courses along with pre-registration status and course details
+      const query = `
+        SELECT
+          pr.id,
+          pr.course_code,
+          pr.status,
+          c.course_name,
+          c.instructor_name,
+          c.slot,
+          c.credit,
+          c.ltpc,
+          c.icornot,
+          c.dcfor,
+          c.defor
+        FROM Course_Pre_Registration pr
+        LEFT JOIN courses c ON pr.course_code = c.course_code
+        WHERE pr.roll_no = $1
+      `
   
+      const result = await pool.query(query, [roll_no])
+  
+      const processed = result.rows.map((row) => {
+        // Determine course type
+        let type = "DE" // default to DE
+        if (row.icornot === "IC") {
+          type = "IC"
+        } else if (row.dcfor.includes(studentBranch)) {
+          type = "DC"
+        }
+  
+        return {
+          id: row.id,
+          course_code: row.course_code,
+          course_name: row.course_name,
+          instructor_name: row.instructor_name,
+          type,
+          slot: row.slot,
+          credit: row.credit,
+          ltpc: row.ltpc,
+          status: row.status,
+        }
+      })
+  
+      res.json(processed)
     } catch (error) {
-      console.error("Database error:", error);
-      res.status(500).json({ error: "Failed to register courses" });
+      console.error("Database error:", error.message)
+      res.status(500).json({
+        error: "Failed to fetch course pre-registrations",
+        details: error.message,
+      })
     }
-  });
+  })
   
-  
+
+app.post("/register-courses", async (req, res) => {
+    try {
+        console.log("Received request:", req.body);
+
+        const { roll_no, courses } = req.body;
+        if (!roll_no || !courses || !Array.isArray(courses)) {
+            return res.status(400).json({ error: "Invalid course data" });
+        }
+
+        // Filter out invalid courses
+        const validCourses = courses.filter(course => 
+            course.course_code && course.course_code !== "None" && course.slot
+        );
+
+        if (validCourses.length === 0) {
+            return res.status(400).json({ error: "No valid courses selected" });
+        }
+
+        console.log("Valid courses:", validCourses);
+
+        // Construct the query dynamically
+        const query = `
+            INSERT INTO Course_Pre_Registration (roll_no, course_code, slot, status) 
+            VALUES ${validCourses.map((_, i) => `($${i * 3 + 1}, $${i * 3 + 2}, $${i * 3 + 3}, 'pending')`).join(", ")}
+            RETURNING *;
+        `;
+
+        const values = validCourses.flatMap(course => [roll_no, course.course_code, course.slot]);
+
+        const result = await pool.query(query, values);
+        console.log("Inserted courses:", result.rows);
+
+        res.status(201).json({ message: "Courses registered successfully", data: result.rows });
+    } catch (error) {
+        console.error("Database error:", error.message, error.stack);
+        res.status(500).json({ error: "Failed to register courses", details: error.message });
+    }
+    
+});
+
 // Delete a pre-registration
 app.delete("/coursepreregistration/:id", async (req, res) => {
     try {
@@ -318,8 +388,83 @@ app.get("/available-courses/:branch_code", async (req, res) => {
         res.status(500).json({ error: "Internal Server Error", details: error.message });
     }
 });
+//Get Courses Taught by an Instructor (with student preregistration info)
+app.get("/instructor/:id/courses", async (req, res) => {
+    try {
+        const { id } = req.params;
 
+        // Join instructors with courses to get course details
+        const coursesQuery = `
+            SELECT i.course_code, c.course_name 
+            FROM instructors i
+            JOIN courses c ON i.course_code = c.course_code
+            WHERE i.instructor_id = $1
+            LIMIT 6
+        `;
+        const coursesResult = await pool.query(coursesQuery, [id]);
 
+        const courses = await Promise.all(
+            coursesResult.rows.map(async (course) => {
+                // Get students for each course
+                const studentsQuery = `
+                    SELECT 
+                        pr.id,
+                        pr.roll_no,
+                        s.student_name,
+                        s.student_branch_code AS branch,
+                        pr.status
+                    FROM course_pre_registration pr
+                    JOIN students s ON pr.roll_no = s.roll_no
+                    WHERE pr.course_code = $1
+                `;
+                const studentsResult = await pool.query(studentsQuery, [course.course_code]);
+
+                return {
+                    course_code: course.course_code,
+                    course_name: course.course_name,
+                    students: studentsResult.rows,
+                };
+            })
+        );
+
+        res.json(courses);
+    } catch (error) {
+        console.error("Instructor Courses Error:", error.message);
+        res.status(500).json({ error: "Failed to fetch instructor courses", details: error.message });
+    }
+});
+
+// 2. Update Student Status (Accept/Reject) for a Pre-Registered Course
+app.put("/coursepreregistration/:id/status", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        if (!["accepted", "rejected"].includes(status)) {
+            return res.status(400).json({ error: "Invalid status" });
+        }
+
+        const updateQuery = `
+            UPDATE course_pre_registration 
+            SET status = $1 
+            WHERE id = $2 
+            RETURNING *
+        `;
+        const result = await pool.query(updateQuery, [status, id]);
+
+        if (result.rowCount === 0) {
+            return res.status(404).json({ message: "Registration not found" });
+        }
+
+        res.json({
+            message: "Status updated successfully",
+            updated: result.rows[0],
+        });
+    } catch (error) {
+        console.error("Update Status Error:", error.message);
+        res.status(500).json({ error: "Failed to update status", details: error.message });
+    }
+});
 
 app.listen(5001, () => {
     console.log("server has started on port 5001");
