@@ -332,7 +332,7 @@ const handleSubmit = async () => {
 
     console.log("Submitting payload:", JSON.stringify(requestBody, null, 2));
 
-    const response = await fetch("http://localhost:5001/register-courses", {
+    const response = await fetch("http://localhost:5001/register-courses-final", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -394,9 +394,9 @@ const handleSubmit = async () => {
     <div className="flex justify-center items-center min-h-screen">
       <Card className="w-[750px]">
         <CardHeader>
-          <CardTitle className="text-4xl">Course Registration</CardTitle>
+          <CardTitle className="text-4xl">Course Pre-Registration</CardTitle>
           <CardDescription className="text-red-500">
-            *Last day for course registration is 15-08-2025
+            *Last day for course pre-registration is 15-08-2025
           </CardDescription>
         </CardHeader>
   
@@ -447,7 +447,7 @@ const handleSubmit = async () => {
         </CardContent>
   
         <CardFooter className="flex justify-between">
-          <Button>Save</Button>
+         
           <Button
             disabled={totalCredits > maxCreditLimit || totalCredits < minCreditLimit}
             onClick={handleSubmit}
