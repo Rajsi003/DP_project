@@ -158,7 +158,7 @@ npm run dev
 ![Course Summary 2](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.30.52%E2%80%AFAM.png?raw=true)
 
 ### 🧾 Course Registration  
-![Course Registration 1](https://github.com/Rajsi003/DP_project/blob/f04881c3500444db94d16b0ca47a1f7d25fc55c1/Ss_DP/Screenshot%202025-06-21%20at%201.05.33%E2%80%AFPM.png)
+![Course Registration 1](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.05.33%E2%80%AFPM.png?raw=true)
 ![Course Registration 2](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.30.29%E2%80%AFAM.png?raw=true)
 
 ### 👩‍💼 Admin Login  
