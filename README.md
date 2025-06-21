@@ -37,24 +37,84 @@ We submitted our initial prototype, which has since been handed over to a dedica
 
 ---
 
-## 📂 Project Structure
+## 📁 Project Structure
 
 ```
 samarth2.0/
 ├── public/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── routes/
-│   └── main.tsx
+│   ├── sample_input.txt
+│   ├── sample_output.txt
+│   └── vite.svg
 ├── server/
+│   ├── database.sql
+│   ├── db.js
 │   ├── index.js
-│   └── db.js
+│   ├── package.json
+│   └── package-lock.json
+├── src/
+│   ├── _auth/
+│   │   └── Login.tsx
+│   ├── _root/
+│   ├── pages/
+│   │   ├── AddCourse.tsx
+│   │   ├── Admin.tsx
+│   │   ├── AllCourses.tsx
+│   │   ├── CourseList.tsx
+│   │   ├── CourseRegistration.tsx
+│   │   ├── CourseSelection.tsx
+│   │   ├── EditCourse.tsx
+│   │   ├── Home.tsx
+│   │   ├── index.ts
+│   │   ├── InstructorPage.tsx
+│   │   ├── RegisteredCoursePage.tsx
+│   │   ├── RegisteredCourses.tsx
+│   │   ├── Sidebar.tsx
+│   │   ├── Student.tsx
+│   │   ├── ThankYou.tsx
+│   │   └── RootLayout.tsx
+│   ├── assets/
+│   ├── components/
+│   │   ├── shared/
+│   │   │   ├── app-sidebar.tsx
+│   │   │   └── Sidebar.tsx
+│   │   └── ui/
+│   │       ├── alert-dialog.tsx
+│   │       ├── aspect-ratio.tsx
+│   │       ├── avatar.tsx
+│   │       ├── badge.tsx
+│   │       ├── button.tsx
+│   │       ├── card.tsx
+│   │       ├── checkbox.tsx
+│   │       ├── popover.tsx
+│   │       ├── select.tsx
+│   │       ├── separator.tsx
+│   │       ├── sidebar.tsx
+│   │       ├── skeleton.tsx
+│   │       ├── table.tsx
+│   │       ├── tabs.tsx
+│   │       ├── textarea.tsx
+│   │       ├── tooltip.tsx
+│   │       └── use-mobile.ts
+│   ├── hooks/
+│   │   └── use-mobile.ts
+│   ├── lib/
+│   │   └── utils.ts
+│   ├── App.tsx
+│   ├── global.css
+│   └── main.tsx
+├── .gitignore
+├── components.json
+├── eslint.config.js
 ├── index.html
 ├── package.json
+├── package-lock.json
+├── pnpm-lock.yaml
+├── tsconfig.app.json
 ├── tsconfig.json
-├── vite.config.ts
+├── tsconfig.node.json
+└── vite.config.ts
 ```
+
 
 
 ---
