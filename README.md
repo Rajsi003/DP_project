@@ -1,50 +1,44 @@
-# React + TypeScript + Vite
+#📘 ERP Module – Course Registration Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project began as part of our IC-202P course, where we were tasked with developing a comprehensive web platform for our college students with features to manage course pre-registration, final registration, view results, access course information, and stay updated with academic events via a calendar.
 
-Currently, two official plugins are available:
+Having experienced firsthand the challenges students face with our current systems—shifting from OAS to Samarth, and at times even relying on Google Forms—we recognized the need for a more stable, streamlined, and college-specific solution.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Under the guidance of the AD (Courses), we implemented features tailored to our institute's specific needs. Our team collaborated closely, dividing responsibilities effectively. My primary focus was on developing the course pre-registration and final registration modules.
 
-## Expanding the ESLint configuration
+We submitted our initial prototype, which has since been handed over to a dedicated team for further refinement. The enhanced version is planned to be tested for use in the upcoming semester. This reposititory is just my contribution to the project.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Here it goes,
 
-- Configure the top-level `parserOptions` property like this:
+A modern college management platform built using React, TypeScript, Tailwind CSS, and Vite. It allows students to pre-register for courses, register for courses, view course summary,calandar for events, results for grade card generation,instructors to manage their course pre-registrations efficiently and admins to manage everything like updating student, instructor and course details via an intuitive interface.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+🚀 Tech Stack
+React 19
+TypeScript
+Vite
+Tailwind CSS 4
+Shadcn/UI
+React Router DOM
+Node.js
+Express
+PostgreSQL
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+📂 Project Structure
+samarth2.0/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── routes/
+│   └── main.tsx
+├── index.html
+├── package.json
+├── tsconfig.json
+└── vite.config.ts
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Try It Out!
+cd server
+nodemon index
+npm run dev
+
