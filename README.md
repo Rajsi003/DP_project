@@ -38,7 +38,23 @@ We submitted our initial prototype, which has since been handed over to a dedica
 ---
 
 ## 📂 Project Structure
-<pre> ``` samarth2.0/ ├── public/ ├── src/ │ ├── components/ │ ├── pages/ │ ├── routes/ │ └── main.tsx ├── server/ │ ├── index.js │ └── db.js ├── index.html ├── package.json ├── tsconfig.json ├── vite.config.ts ``` </pre>
+
+```
+samarth2.0/
+├── public/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── routes/
+│   └── main.tsx
+├── server/
+│   ├── index.js
+│   └── db.js
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+```
 
 
 ---
