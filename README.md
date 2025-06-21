@@ -135,52 +135,53 @@ npm run dev
 
 
 
+
+
 ## 📸 Screenshots
 
-### 🏠 Homepage
-![Homepage](Ss_DP/Screenshot 2025-06-21 at 11.27.30 AM.png)
+### 🏠 Homepage  
+![Homepage](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.27.30%E2%80%AFAM.png?raw=true)
 
-### 🙋‍♂️ Student Login
-![Student Login](Ss_DP/Screenshot 2025-06-21 at 11.37.03 AM.png)
+### 🙋‍♂️ Student Login  
+![Student Login](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.37.03%E2%80%AFAM.png?raw=true)
 
-### 📚 Student Dashboard
-![Student Dashboard](Ss_DP/Screenshot 2025-06-21 at 11.29.04 AM.png)
+### 📚 Student Dashboard  
+![Student Dashboard](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.29.04%E2%80%AFAM.png?raw=true)
 
-### 📝 Course Pre-Registration
-![Course Pre-Registration 1](Ss_DP/Screenshot 2025-06-21 at 11.30.14 AM.png)  
-![Course Pre-Registration 2](Ss_DP/Screenshot 2025-06-21 at 11.32.16 AM.png)  
-![Course Pre-Registration 3](Ss_DP/Screenshot 2025-06-21 at 11.35.06 AM.png)
+### 📝 Course Pre-Registration  
+![Course Pre-Registration 1](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.30.14%E2%80%AFAM.png?raw=true)  
+![Course Pre-Registration 2](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.32.16%E2%80%AFAM.png?raw=true)  
+![Course Pre-Registration 3](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.35.06%E2%80%AFAM.png?raw=true)
 
-### 📄 Course Summary
-![Course Summary 1](Ss_DP/Screenshot 2025-06-21 at 11.47.30 AM.png)  
-![Course Summary 2](Ss_DP/Screenshot 2025-06-21 at 11.30.52 AM.png)
+### 📄 Course Summary  
+![Course Summary 1](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.47.30%E2%80%AFAM.png?raw=true)  
+![Course Summary 2](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.30.52%E2%80%AFAM.png?raw=true)
 
-### 🧾 Course Registration
-![Course Registration 1](Ss_DP/Screenshot 2025-06-21 at 1.05.33 PM.png)  
-![Course Registration 2](Ss_DP/Screenshot 2025-06-21 at 11.30.29 AM.png)
+### 🧾 Course Registration  
+![Course Registration 1](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2013.05.33%E2%80%AFPM.png?raw=true)  
+![Course Registration 2](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.30.29%E2%80%AFAM.png?raw=true)
 
-### 👩‍💼 Admin Login
-![Admin Login](Ss_DP/Screenshot 2025-06-21 at 11.38.18 AM.png)
+### 👩‍💼 Admin Login  
+![Admin Login](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.38.18%E2%80%AFAM.png?raw=true)
 
-### 🛠️ Admin Dashboard
-![Admin Dashboard](Ss_DP/Screenshot 2025-06-21 at 11.38.23 AM.png)
+### 🛠️ Admin Dashboard  
+![Admin Dashboard](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.38.23%E2%80%AFAM.png?raw=true)
 
-### 📋 Course Details
-![Course Details 1](Ss_DP/Screenshot 2025-06-21 at 11.38.42 AM.png)  
-![Course Details 2](Ss_DP/Screenshot 2025-06-21 at 11.39.12 AM.png)
+### 📋 Course Details  
+![Course Details 1](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.38.42%E2%80%AFAM.png?raw=true)  
+![Course Details 2](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.39.12%E2%80%AFAM.png?raw=true)
 
-### ✏️ Edit Course Details
-![Edit Course](Ss_DP/Screenshot 2025-06-21 at 11.38.49 AM.png)
+### ✏️ Edit Course Details  
+![Edit Course](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.38.49%E2%80%AFAM.png?raw=true)
 
-### ➕ Add New Course
-![Add Course](Ss_DP/Screenshot 2025-06-21 at 11.39.03 AM.png)
+### ➕ Add New Course  
+![Add Course](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.39.03%E2%80%AFAM.png?raw=true)
 
-### 👨‍🏫 Instructor Login
-![Instructor Login](Ss_DP/Screenshot 2025-06-21 at 11.40.32 AM.png)
+### 👨‍🏫 Instructor Login  
+![Instructor Login](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.40.32%E2%80%AFAM.png?raw=true)
 
-### 📊 Instructor Dashboard
-![Instructor Dashboard](Ss_DP/Screenshot 2025-06-21 at 11.41.28 AM.png)
-
+### 📊 Instructor Dashboard  
+![Instructor Dashboard](https://github.com/Rajsi003/DP_project/blob/main/Ss_DP/Screenshot%202025-06-21%20at%2011.41.28%E2%80%AFAM.png?raw=true)
 
 
 
