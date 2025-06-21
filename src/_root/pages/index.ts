@@ -23,5 +23,5 @@ export { default as EditCourse} from "./EditCourse";
 
 export { default as RegisteredCourses} from "./RegisteredCourses";
 
-
+export { default as RegisteredStudents} from "./RegisteredStudents";
 

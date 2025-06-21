@@ -220,9 +220,9 @@ interface Course {
 const maxCreditLimit = 22; 
 const minCreditLimit = 4;
 const slots = ["A", "B", "C", "D", "E", "F", "G", "H", "FS"];
-const roll_no = "B23188";
+const roll_no = "B23181";
 const branch_code = "CS2";
-
+//const roll
 const CourseSelectionForm = () => {
   const [showPopup, setShowPopup] = useState(false);
    const [errors, setErrors] = useState<Record<string, string>>({});

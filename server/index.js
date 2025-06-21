@@ -10,7 +10,49 @@ app.use(express.json());
 //ROUTES
 
 //ALL-COURSE ROUTES
-
+// Get all courses with registered students
+app.get("/courses-with-students", async (req, res) => {
+    try {
+      const result = await pool.query(`
+        SELECT 
+          c.course_code,
+          c.course_name,
+          s.roll_no,
+          s.student_name,
+          s.student_branch_code,
+          cr.slot
+        FROM course_registration cr
+        JOIN students s ON cr.roll_no = s.roll_no
+        JOIN courses c ON cr.course_code = c.course_code
+        ORDER BY c.course_code, s.roll_no
+      `);
+  
+      // Group students under their respective courses
+      const grouped = {};
+      for (const row of result.rows) {
+        const course = row.course_code;
+        if (!grouped[course]) {
+          grouped[course] = {
+            course_name: row.course_name,
+            course_code: course,
+            students: [],
+          };
+        }
+        grouped[course].students.push({
+          roll_no: row.roll_no,
+          name: row.student_name,
+          branch: row.student_branch_code,
+          slot: row.slot,
+        });
+      }
+  
+      res.json(Object.values(grouped));
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).json({ error: "Server error" });
+    }
+  });
+  
 //get all courses
  app.get("/courses", async(req,res) =>{
     try {
@@ -453,9 +495,9 @@ app.get("/instructor/:id/courses", async (req, res) => {
 
         const courses = await Promise.all(
             coursesResult.rows.map(async (course) => {
-                // Get students for each course
+                // Get unique students for each course
                 const studentsQuery = `
-                    SELECT 
+                    SELECT DISTINCT ON (pr.roll_no)
                         pr.id,
                         pr.roll_no,
                         s.student_name,
@@ -464,6 +506,7 @@ app.get("/instructor/:id/courses", async (req, res) => {
                     FROM course_pre_registration pr
                     JOIN students s ON pr.roll_no = s.roll_no
                     WHERE pr.course_code = $1
+                    ORDER BY pr.roll_no, pr.id
                 `;
                 const studentsResult = await pool.query(studentsQuery, [course.course_code]);
 
@@ -481,6 +524,7 @@ app.get("/instructor/:id/courses", async (req, res) => {
         res.status(500).json({ error: "Failed to fetch instructor courses", details: error.message });
     }
 });
+
 // PUT /coursepreregistration/priority/:roll_no
 app.post("/coursepreregistration/priority/:roll_no", async (req, res) => {
     const { roll_no } = req.params;

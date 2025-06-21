@@ -229,7 +229,7 @@ const CourseRegistrationForm = () => {
         </CardContent>
 
         <CardFooter className="flex justify-between">
-          <Button>Save</Button>
+
           <Button
             disabled={totalCredits > maxCreditLimit || totalCredits < minCreditLimit}
             onClick={handleSubmit}

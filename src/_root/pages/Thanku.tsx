@@ -1,3 +1,6 @@
+///display all registered courses course-wise
+
+
 // import React, { useEffect, useState } from "react"
 // import {
 //   useReactTable,
@@ -430,6 +433,43 @@ const CourseTable = () => {
   >({});
   const [error, setError] = React.useState<string | null>(null);
 
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch(
+  //         `http://localhost:5001/coursepreregistration/${rollNo}`
+  //       );
+  //       const json = await res.json();
+  //       setData(json);
+
+  //       // Calculate the number of accepted courses per slot
+  //       const slotCounts: Record<string, number> = {};
+  //       json.forEach((course: any) => {
+  //         if (course.status === "accepted") {
+  //           slotCounts[course.slot] = (slotCounts[course.slot] || 0) + 1;
+  //         }
+  //       });
+  //       setSlotAcceptedCount(slotCounts);
+  //     } catch (err) {
+  //       console.error("Failed to fetch courses", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [rollNo]);
+
+  // const handlePriorityChange = (
+  //   e: React.ChangeEvent<HTMLSelectElement>,
+  //   courseId: string
+  // ) => {
+  //   const newPriority = e.target.value;
+  //   setTempPriorities((prev) => ({
+  //     ...prev,
+  //     [courseId]: newPriority,
+  //   }));
+  // };
   React.useEffect(() => {
     const fetchData = async () => {
       try {
@@ -437,8 +477,14 @@ const CourseTable = () => {
           `http://localhost:5001/coursepreregistration/${rollNo}`
         );
         const json = await res.json();
+        // Set 'dc' status to 'accepted' by default
+        json.forEach((course: any) => {
+          if (course.status === "dc") {
+            course.status = "accepted"; // Change 'dc' to 'accepted'
+          }
+        });
         setData(json);
-
+  
         // Calculate the number of accepted courses per slot
         const slotCounts: Record<string, number> = {};
         json.forEach((course: any) => {
@@ -453,20 +499,10 @@ const CourseTable = () => {
         setLoading(false);
       }
     };
-
+  
     fetchData();
   }, [rollNo]);
-
-  const handlePriorityChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    courseId: string
-  ) => {
-    const newPriority = e.target.value;
-    setTempPriorities((prev) => ({
-      ...prev,
-      [courseId]: newPriority,
-    }));
-  };
+  
 
   const filteredData = data.filter(
     (course) =>
@@ -554,7 +590,7 @@ const CourseTable = () => {
                       {course.status}
                     </div>
                   </td>
-                  <td className="px-4 py-2">
+                  {/* <td className="px-4 py-2">
                     {course.status === "rejected" ? (
                       <div>-</div>
                     ) : // Check if there are more than one course in the slot before showing the priority dropdown
@@ -576,7 +612,31 @@ const CourseTable = () => {
                     ) : (
                       <div>-</div> // No need to show the priority dropdown if there's only one course in the slot
                     )}
-                  </td>
+                  </td> */}
+                  <td className="px-4 py-2">
+  {course.status === "rejected" ? (
+    <div>-</div>
+  ) : course.status === "dc" ? (
+    // Don't show priority for courses with "dc" status
+    <div>-</div>
+  ) : slotAcceptedCount[course.slot] > 1 ? (
+    <select
+      value={tempPriorities[course.id] ?? ""}
+      onChange={(e) => handlePriorityChange(e, course.id)}
+      className="border rounded px-2 py-1"
+    >
+      <option value="">Select Priority</option>
+      {[...Array(slotAcceptedCount[course.slot] || 0)].map((_, index) => (
+        <option key={index} value={index + 1}>
+          {index + 1}
+        </option>
+      ))}
+    </select>
+  ) : (
+    <div>-</div> // No need to show the priority dropdown if there's only one course in the slot
+  )}
+</td>
+
                 </tr>
               ))
             ) : (

@@ -9,6 +9,7 @@ import  AddCourse  from './_root/pages/AddCourse';
 import  CourseList  from './_root/pages/CourseList';
 import  Student  from './_root/pages/Student';
 import  Admin from './_root/pages/Admin';
+import  RegisteredStudents from './_root/pages/RegisteredStudents';
 import CourseRegistrationForm from './_root/pages/CourseRegistrationForm';
 import { InstructorPreReg, RegisteredCourses } from './_root/pages';
 import RootLayout from './_root/RootLayout';
@@ -37,6 +38,7 @@ const App = () => {
                 <Route path="/admin" element={<Admin/>}/>
                 <Route path="/instructor/:id/courses" element={<InstructorPreReg />} />
                 <Route path="/registered-courses" element={<RegisteredCourses />} />
+                <Route path="/all-students" element={<RegisteredStudents />} />
 
 
           

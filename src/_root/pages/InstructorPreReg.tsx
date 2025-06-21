@@ -34,7 +34,6 @@ type Student = {
     branch: string;
     status: string;
   };
-  
 
 const InstructorPreReg = () => {
   const { id } = useParams<{ id: string }>();
@@ -42,6 +41,10 @@ const InstructorPreReg = () => {
   const [studentsByCourse, setStudentsByCourse] = useState<Record<string, Student[]>>({});
 
   useEffect(() => {
+    // Change background color of the entire page to black
+    document.body.style.backgroundColor = "black";
+    document.body.style.color = "white"; // Make text white for visibility
+
     // Fetch courses which already include students
     fetch(`http://localhost:5001/instructor/${id}/courses`)
       .then((res) => res.json())
@@ -57,6 +60,12 @@ const InstructorPreReg = () => {
         setStudentsByCourse(studentsMap);
       })
       .catch((error) => console.error("Error fetching courses:", error));
+
+    // Cleanup function to reset background color when component unmounts
+    return () => {
+      document.body.style.backgroundColor = "";
+      document.body.style.color = "";
+    };
   }, [id]);
 
   const handleStatusChange = (
@@ -96,64 +105,65 @@ const InstructorPreReg = () => {
       alert("Failed to save changes");
     }
   };
-  
-  
-  return (
-    <Tabs defaultValue={courses[0]?.course_code} className="w-[700px]">
-      <TabsList className="grid grid-cols-2">
-        {courses.map((course) => (
-          <TabsTrigger key={course.course_code} value={course.course_code}>
-            {course.course_code}
-          </TabsTrigger>
-        ))}
-      </TabsList>
 
-      {courses.map((course) => (
-        <TabsContent key={course.course_code} value={course.course_code}>
-          <Card>
-            <CardHeader>
-              <CardTitle>{course.course_name}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {studentsByCourse[course.course_code]?.length ? (
-                studentsByCourse[course.course_code].map((student) => (
-                  <div key={student.roll_no} className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">
-                        {student.student_name} ({student.roll_no})
-                      </p>
-                      <p className="text-sm text-muted-foreground">{student.branch}</p>
+  return (
+    <div className="w-full">
+      <Tabs defaultValue={courses[0]?.course_code} className="w-[700px] p-6">
+        <TabsList className="grid grid-cols-2">
+          {courses.map((course) => (
+            <TabsTrigger key={course.course_code} value={course.course_code}>
+              {course.course_code}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+
+        {courses.map((course) => (
+          <TabsContent key={course.course_code} value={course.course_code}>
+            <Card>
+              <CardHeader>
+                <CardTitle>{course.course_name}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                {studentsByCourse[course.course_code]?.length ? (
+                  studentsByCourse[course.course_code].map((student) => (
+                    <div key={student.roll_no} className="flex items-center justify-between">
+                      <div>
+                        <p className="font-medium">
+                          {student.student_name} ({student.roll_no})
+                        </p>
+                        <p className="text-sm text-muted-foreground">{student.branch}</p>
+                      </div>
+                      <Select
+                        value={student.status}
+                        onValueChange={(value) =>
+                          handleStatusChange(course.course_code, student.roll_no, value)
+                        }
+                      >
+                        <SelectTrigger className="w-[150px]">
+                          <SelectValue placeholder="Status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pending">Pending</SelectItem>
+                          <SelectItem value="accepted">Accepted</SelectItem>
+                          <SelectItem value="rejected">Rejected</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <Select
-                      value={student.status}
-                      onValueChange={(value) =>
-                        handleStatusChange(course.course_code, student.roll_no, value)
-                      }
-                    >
-                      <SelectTrigger className="w-[150px]">
-                        <SelectValue placeholder="Status" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="pending">Pending</SelectItem>
-                        <SelectItem value="accepted">Accepted</SelectItem>
-                        <SelectItem value="rejected">Rejected</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                ))
-              ) : (
-                <p>No students registered for this course.</p>
-              )}
-            </CardContent>
-            <CardFooter>
-              <Button onClick={() => saveChanges(course.course_code)}>
-                Save changes
-              </Button>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-      ))}
-    </Tabs>
+                  ))
+                ) : (
+                  <p>No students registered for this course.</p>
+                )}
+              </CardContent>
+              <CardFooter>
+                <Button onClick={() => saveChanges(course.course_code)}>
+                  Save changes
+                </Button>
+              </CardFooter>
+            </Card>
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
   );
 };
 
